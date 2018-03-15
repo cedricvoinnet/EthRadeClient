@@ -1,15 +1,17 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { TransactionsComponent } from './transactions/transactions.component';
 import { ContactsComponent } from './contacts/contacts.component';
 import { WalletComponent } from './wallet/wallet.component';
 import { SettingsComponent } from './settings/settings.component';
-import { ConnectionComponent } from './connection/connection.component';
 import { AppRoutingModule } from './/app-routing.module';
-
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
+import { QRCodeModule } from 'angularx-qrcode';
+import { CurrentLoggedKey } from './CurrentLoggedKey';
 
 @NgModule({
   declarations: [
@@ -18,13 +20,18 @@ import { AppRoutingModule } from './/app-routing.module';
     ContactsComponent,
     WalletComponent,
     SettingsComponent,
-    ConnectionComponent
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    QRCodeModule,
   ],
-  providers: [],
+  providers: [
+    CurrentLoggedKey,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

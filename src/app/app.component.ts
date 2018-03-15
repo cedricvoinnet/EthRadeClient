@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CurrentLoggedKey } from './CurrentLoggedKey';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = "Eth'Rade";
+
+  constructor(private key: CurrentLoggedKey){}
 }
