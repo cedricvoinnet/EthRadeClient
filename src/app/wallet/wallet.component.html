@@ -1,3 +1,18 @@
-<p>
-  wallet works!
-</p>
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">From</th>
+        <th scope="col">To</th>
+        <th scope="col">Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let transac of transactions">
+        <td>{{ transac.from }}</td>
+        <td>{{ transac.to }}</td>
+        <td>{{ transac.amount }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

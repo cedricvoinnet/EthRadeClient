@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CurrentLoggedKey } from './CurrentLoggedKey';
+import { CurrentUser } from './CurrentUser';
 
 @Component({
   selector: 'app-root',
@@ -9,5 +9,5 @@ import { CurrentLoggedKey } from './CurrentLoggedKey';
 export class AppComponent {
   title = "Eth'Rade";
 
-  constructor(private key: CurrentLoggedKey){}
+  constructor(private key: CurrentUser){}
 }

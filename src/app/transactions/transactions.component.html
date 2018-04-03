@@ -2,16 +2,22 @@
   <div class="row">
     <div class="col-md-6 fieldset text-center">
       <label for="otherKey" class="sr-only">Key to send</label>
-      <input type="text" id="otherKey" class="form-control" placeholder="Key to send" required autofocus/>
+      <input type="text" id="otherKey" class="form-control" [(ngModel)]="transaction.to" placeholder="Key to send" required autofocus/>
       <label for="amountToSend" class="sr-only">Amount to send</label>
-      <input type="number" id="amountToSend" class="form-control" placeholder="Amount to send" required autofocus/>
-      <button class="btn btn-lg btn-primary mt-2" (click)="sendEth()">Send Ether</button>
+      <input type="number" id="amountToSend" class="form-control" [(ngModel)]="transaction.amount" placeholder="Amount to send" required autofocus/>
+      <label for="addToContact" >Add this key to your contact?</label>
+      <input type="checkbox" [(ngModel)]="transaction.addToContact" id="addToContact"/>
+
+      <label for="surname" *ngIf="transaction.addToContact" >Contact surname</label>
+      <input type="text" id="surname" class="form-control" [(ngModel)]="newContact.surname" *ngIf="transaction.addToContact" />
+      <button class="btn btn-lg btn-primary mt-3" (click)="sendEth()">Send Ether</button>
     </div>
     <div class="col-md-6 fieldset text-center">
       <p>
         Here is the QRcode for your key!
       </p>
-      <qrcode [qrdata]="key.key" [size]="256" [level]="'M'"></qrcode>
+      <qrcode [qrdata]="user.key" [size]="256" [level]="'M'"></qrcode>
     </div>
   </div>
+
 </div>

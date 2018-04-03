@@ -1,3 +1,16 @@
-<p>
-  contacts works!
-</p>
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Username</th>
+        <th scope="col">Key</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let contact of contacts">
+        <td>{{ contact.surname }}</td>
+        <td>{{ contact.key }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

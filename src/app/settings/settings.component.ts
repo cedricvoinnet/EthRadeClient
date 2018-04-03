@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { CurrentUser} from '../CurrentUser';
 
 @Component({
   selector: 'app-settings',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private key: CurrentUser, private router: Router) { }
 
   ngOnInit() {
+    if (!this.key.key){
+      this.router.navigate(['/login']);
+    }
   }
 
 }
