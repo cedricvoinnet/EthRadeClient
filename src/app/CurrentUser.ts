@@ -4,5 +4,5 @@ import { Injectable } from "@angular/core";
 export class CurrentUser {
   username: string = "";
   password: string = "";
-  key: string = "";
+  key: string = "tretrettr";
 }

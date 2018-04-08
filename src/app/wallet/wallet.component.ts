@@ -9,17 +9,20 @@ import { CurrentUser } from "../CurrentUser";
   styleUrls: ["./wallet.component.css"]
 })
 export class WalletComponent implements OnInit {
+  private ethereumService: EthereumService;
+
   constructor(
     private key: CurrentUser,
     private router: Router,
-    private ethereumService: EthereumService
   ) {}
 
-  ngOnInit() {
-    console.log("enter wallet");
-    console.log(this.key);
+  async ngOnInit() {
+    this.ethereumService = new EthereumService("test");
+    this.ethereumService.createWallet();
+    let test = await this.ethereumService.getBalance("0xaFB7df1dEd98bfc03161feec09AC56Ab8eaB3E61");
+    console.log(test);
     if (!this.key.key) {
-      this.router.navigate(["/login"]);
+   //   this.router.navigate(["/login"]);
     }
   }
 }

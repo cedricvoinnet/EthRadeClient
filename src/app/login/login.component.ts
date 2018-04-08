@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
   }
 
   login(content) {
-    this.connection.login(this.model).subscribe(
+   /* this.connection.login(this.model).subscribe(
       res => {
         this.model.key = res.token;
         this.user.username = this.model.username;
@@ -66,6 +66,7 @@ export class LoginComponent implements OnInit {
     if (this.model.key) {
       this.user = this.model;
       this.router.navigate(["/wallet"]);
-    }
+    } */
+    this.router.navigate(["/wallet"]);
   }
 }
