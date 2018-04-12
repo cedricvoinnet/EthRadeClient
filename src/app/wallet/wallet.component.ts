@@ -18,7 +18,7 @@ export class WalletComponent implements OnInit {
 
   async ngOnInit() {
     this.ethereumService = new EthereumService("test");
-    this.ethereumService.createWallet();
+     this.ethereumService.createWallet();
     let test = await this.ethereumService.getBalance("0xaFB7df1dEd98bfc03161feec09AC56Ab8eaB3E61");
     console.log(test);
     if (!this.key.key) {
