@@ -14,7 +14,6 @@ export class EthereumService {
   private _address: any;
   private _password: any;
   private _account: any;
-  private _gasPrice : any;
 
   constructor(password : String) {
     let Web3F : any = Web3;
@@ -81,15 +80,7 @@ export class EthereumService {
    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  async getGasPrice() {
-    return this._web3.eth.getGasPrice().then(function(receipt) {
-      return receipt;
-    }
-  }
-
   async createWallet() {
-    this._gasPrice = await this.getGasPrice();
-    console.log(this._gasPrice);
     this._account = await this.newAccount();
     console.log(this._account);
     //this.encrypt();
@@ -108,7 +99,7 @@ export class EthereumService {
     console.log('account - ');
     console.log(this._account);
     //await this.sleep(60000);
-    this.sendEth(this._account, '0xf06c998d943b1cc355cff0d3a0b0719e68d7cfdd', '1', this._gasPrice;);
+    this.sendEth(this._account, '0xf06c998d943b1cc355cff0d3a0b0719e68d7cfdd', '1');
   }
 
   async getWallet() {
