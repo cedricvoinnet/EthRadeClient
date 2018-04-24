@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-// import { EthereumService } from '../services/ethereum.service';
+import { EthereumService } from '../services/ethereum.service';
 
 @Component({
   selector: 'app-account',
@@ -8,7 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccountComponent implements OnInit {
 
-  constructor() { }
+  passwordImport = '';
+  passwordCreate = '';
+  create = false;
+  import = false;
+
+  constructor(private service: EthereumService) { }
 
   ngOnInit() {
   }
@@ -20,11 +25,28 @@ export class AccountComponent implements OnInit {
       reader.readAsText(file);
       reader.onload = () => {
         console.log(reader.result);
+        this.importPassword();
       }
     }
   }
 
-  createAccount() {
+  createPassword() {
+    this.create = true;
+  }
 
+  importPassword() {
+    this.import = true;
+  }
+
+  createAccount() {
+    console.log(this.passwordCreate);
+    this.service.setPassword(this.passwordCreate);
+    this.service.createWallet();
+  }
+
+  importAccount() {
+    console.log(this.passwordImport);
+    this.service.setPassword(this.passwordImport);
+    this.service.getWallet();
   }
 }

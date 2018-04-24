@@ -15,12 +15,16 @@ export class EthereumService {
   private _password: any = 'test';
   private _account: any;
 
-  constructor(password : String) {
+  constructor() {
     let Web3F : any = Web3;
     this._web3 = new Web3F('http://192.168.0.16:8545');
     //this._web3.providers.WebsocketProvider("wss://192.168.0.16:8545")
     //this._web3 = new Web3.providers.WebsocketProvider("ws://192.168.0.26:8545"));
     console.log(this._web3);
+  }
+
+  setPassword(password) {
+    this._password = password;
   }
 
   newAccount() {
@@ -81,6 +85,7 @@ export class EthereumService {
   }
 
   async createWallet() {
+    console.log(this._password);
     this._account = await this.newAccount();
     console.log(this._account);
     //this.encrypt();
