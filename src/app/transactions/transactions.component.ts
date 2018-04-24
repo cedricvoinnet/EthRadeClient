@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { CurrentUser } from "../CurrentUser";
 import { ContactsService } from "../services/contacts.service";
-// import { EthereumService } from "../services/ethereum.service";
+import { EthereumService } from "../services/ethereum.service";
 
 @Component({
   selector: "app-transactions",
@@ -23,7 +23,7 @@ export class TransactionsComponent implements OnInit {
     private user: CurrentUser,
     private router: Router,
     private contactService: ContactsService,
-    // private ethereumService: EthereumService
+    private ethereumService: EthereumService
   ) {}
 
   ngOnInit() {
@@ -38,6 +38,7 @@ export class TransactionsComponent implements OnInit {
   sendEth() {
     if (this.transaction.to && this.transaction.amount) {
       console.log("send transac to BC");
+      this.ethereumService.send(this.transaction.to, this.transaction.amount)
 
     }
   }

@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 
 @Injectable()
 export class ConnectionService {
-  private url = "http://localhost:5000";
+  private url = "http://192.168.0.26:5000";
 
   constructor(private http: HttpClient) {}
 
@@ -19,6 +19,7 @@ export class ConnectionService {
     return this.http.post(this.url + "/register", {
       username: data["username"],
       password: data["password"]
+      key: data["key"]
     });
   }
 

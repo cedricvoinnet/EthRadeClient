@@ -11,13 +11,12 @@ export class EthereumService {
 
   private _web3: any;
   private _balance: any;
-  private _address: any;
-  private _password: any = 'test';
+  private _password: any;
   private _account: any;
 
   constructor() {
     let Web3F : any = Web3;
-    this._web3 = new Web3F('http://192.168.0.16:8545');
+    this._web3 = new Web3F('http://192.168.0.26:8545');
     //this._web3.providers.WebsocketProvider("wss://192.168.0.16:8545")
     //this._web3 = new Web3.providers.WebsocketProvider("ws://192.168.0.26:8545"));
     console.log(this._web3);
@@ -55,28 +54,11 @@ export class EthereumService {
     });
   }
 
-  readInFile(file) {
-    var rawFile = new XMLHttpRequest();
-    rawFile.open("GET", file, false);
-    rawFile.onreadystatechange = () =>
-    {
-        if(rawFile.readyState === 4)
-        {
-            if(rawFile.status === 200 || rawFile.status == 0)
-            {
-                this._account = rawFile.responseText;
-                console.log(this._account);
-            }
-        }
-    }
-    rawFile.send(null);
-  }
-
   writeFile() {
     const fileStream = streamSaver.createWriteStream('account.json', this._account.length);
     const writer = fileStream.getWriter();
-    // var uint8array = new TextEncoder("utf-8").encode(this._account);
-    // writer.write(uint8array);
+    var uint8array = new TextEncoder("utf-8").encode(this._account);
+    writer.write(uint8array);
     writer.close();
   }
 
@@ -88,27 +70,20 @@ export class EthereumService {
     console.log(this._password);
     this._account = await this.newAccount();
     console.log(this._account);
-    //this.encrypt();
-    //await this.decrypt();
-    console.log(this._account);
     //this.lockAccount('test');
     this.writeFile();
     await this.unlockAccount();
-    await this.sleep(20000)
-    await this.test();
     //this.readInFile('/Users/aureliengiudici/Downloads/account.json');
   }
 
-  async test() {
-    //this.decrypt();
-    console.log('account - ');
-    console.log(this._account);
-    //await this.sleep(60000);
-    this.sendEth(this._account, '0xf06c998d943b1cc355cff0d3a0b0719e68d7cfdd', '1');
+  async getWallet(file) {
+    this._account = file;
   }
 
-  async getWallet() {
-    // this._account = this.readInFile();
+  async send(_to, _amount) {
+    await this.unlockAccount();
+    await this.sendEth(this._account, _to, _amount.toString());
+    this.unlockAccount();
   }
 
   sendEth(_from, _to, _amount) {
@@ -123,8 +98,8 @@ export class EthereumService {
     });
   }
 
-  getBalance(address) {
-    return this._web3.eth.getBalance(address)
+  getBalance() {
+    return this._web3.eth.getBalance(this._account)
     .then(function(receipt) {
       return receipt;
     });
@@ -132,6 +107,6 @@ export class EthereumService {
 
 
   getAddress() {
-    return this._address;
+    return this._account;
   }
 }

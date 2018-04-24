@@ -13,8 +13,7 @@ import { ConnectionService } from "../services/connection.service";
 export class LoginComponent implements OnInit {
   private model = {
     username: "",
-    password: "",
-    key: ""
+    password: ""
   };
   private closeResult: string;
 
@@ -26,9 +25,6 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    if (this.user.key) {
-      this.router.navigate(["/wallet"]);
-    }
   }
 
   open(content) {
@@ -50,12 +46,11 @@ export class LoginComponent implements OnInit {
   }
 
   login(content) {
-   /* this.connection.login(this.model).subscribe(
+   this.connection.login(this.model).subscribe(
       res => {
-        this.model.key = res.token;
         this.user.username = this.model.username;
         this.user.password = this.model.password;
-        this.user.key = this.model.key;
+        console.log(this.user);
         this.router.navigate(["/wallet"]);
       },
       err => {
@@ -63,10 +58,5 @@ export class LoginComponent implements OnInit {
         this.open(content);
       }
     );
-    if (this.model.key) {
-      this.user = this.model;
-      this.router.navigate(["/wallet"]);
-    } */
-    this.router.navigate(["/wallet"]);
   }
 }
