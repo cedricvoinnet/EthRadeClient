@@ -21,4 +21,26 @@ export class ConnectionService {
       password: data["password"]
     });
   }
+
+  getHistory(data): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'username': data.user.username,
+        'password': data.user.password,
+      })
+    };
+    return this.http.get(this.url + "/history", httpOptions);
+  }
+
+  sendTransaction(data): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'username': data.user.username,
+        'password': data.user.password,
+      })
+    };
+    return this.http.post(this.url + "/history", {
+      
+    }, httpOptions);
+  }
 }

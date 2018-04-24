@@ -22,6 +22,7 @@
     "core-js": "^2.4.1",
     "jquery": "^3.3.1",
     "keythereum": "^1.0.2",
+    "ngx-toggle-switch": "^2.0.5",
     "popper.js": "^1.12.9",
     "rxjs": "^5.5.6",
     "streamsaver": "^1.0.1",

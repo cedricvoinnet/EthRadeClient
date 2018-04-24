@@ -9,6 +9,8 @@ import { CurrentUser} from '../CurrentUser';
 })
 export class SettingsComponent implements OnInit {
 
+  private visible = true;
+
   constructor(private key: CurrentUser, private router: Router) { }
 
   ngOnInit() {
@@ -17,4 +19,7 @@ export class SettingsComponent implements OnInit {
     }
   }
 
+  onChange(ev) {
+    console.log(ev);
+  }
 }

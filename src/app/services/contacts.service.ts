@@ -6,16 +6,17 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 export class ContactsService {
   private url = "http://localhost:5000";
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   addContact(data): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
         'username': data.user.username,
         'password': data.user.password,
-      })};
+      })
+    };
     return this.http.post(this.url + "/contacts", {
-      surname: data.new_contact.surname,
+      username: data.new_contact.username,
       key: data.new_contact.key
     }, httpOptions);
   }
@@ -25,7 +26,18 @@ export class ContactsService {
       headers: new HttpHeaders({
         'username': data.user.username,
         'password': data.user.password,
-  })};
+      })
+    };
     return this.http.get(this.url + "/contacts", httpOptions);
+  }
+
+  getUsers(data): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'username': data.user.username,
+        'password': data.user.password,
+      })
+    };
+    return this.http.get(this.url + "/users", httpOptions);
   }
 }

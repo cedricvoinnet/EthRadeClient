@@ -12,7 +12,7 @@ export class EthereumService {
   private _web3: any;
   private _balance: any;
   private _address: any;
-  private _password: any;
+  private _password: any = 'test';
   private _account: any;
 
   constructor(password : String) {
@@ -21,40 +21,40 @@ export class EthereumService {
     //this._web3.providers.WebsocketProvider("wss://192.168.0.16:8545")
     //this._web3 = new Web3.providers.WebsocketProvider("ws://192.168.0.26:8545"));
     console.log(this._web3);
-  } 
+  }
 
   newAccount() {
     //return this._web3.eth.accounts.create();
-    return this._web3.eth.personal.newAccount('test').then(function(receipt) {
+    return this._web3.eth.personal.newAccount(this._password).then(function(receipt) {
       console.log("Newaccount");
       console.log(receipt);
       console.log("end - Newaccount");
       return receipt;
-    } 
+    });
   }
 
   lockAccount() {
-    this._web3.eth.personal.lockAccount(this._account, 'test').then(function(receipt) {
+    this._web3.eth.personal.lockAccount(this._account, this._password).then(function(receipt) {
       console.log("lockAccount");
       console.log(receipt);
       console.log("end lockAccount");
       return receipt;
-    }
+    });
   }
 
   async unlockAccount() {
-     return await this._web3.eth.personal.unlockAccount(this._account, 'test').then(function(receipt) {
+     return await this._web3.eth.personal.unlockAccount(this._account, this._password).then(function(receipt) {
       console.log("UnlockAccount");
       console.log(receipt);
       console.log("end UnlockAccount");
       return receipt;
-    }
+    });
   }
 
-  readInFile(file : String) {
+  readInFile(file) {
     var rawFile = new XMLHttpRequest();
     rawFile.open("GET", file, false);
-    rawFile.onreadystatechange = function ()
+    rawFile.onreadystatechange = () =>
     {
         if(rawFile.readyState === 4)
         {
@@ -71,8 +71,8 @@ export class EthereumService {
   writeFile() {
     const fileStream = streamSaver.createWriteStream('account.json', this._account.length);
     const writer = fileStream.getWriter();
-    var uint8array = new TextEncoder("utf-8").encode(this._account);
-    writer.write(uint8array);
+    // var uint8array = new TextEncoder("utf-8").encode(this._account);
+    // writer.write(uint8array);
     writer.close();
   }
 
@@ -88,7 +88,7 @@ export class EthereumService {
     console.log(this._account);
     //this.lockAccount('test');
     this.writeFile();
-    await this.unlockAccount('test');
+    await this.unlockAccount();
     await this.sleep(20000)
     await this.test();
     //this.readInFile('/Users/aureliengiudici/Downloads/account.json');
@@ -103,7 +103,7 @@ export class EthereumService {
   }
 
   async getWallet() {
-    this._account = this.readInFile();
+    // this._account = this.readInFile();
   }
 
   sendEth(_from, _to, _amount) {

@@ -1,18 +1,25 @@
 <div class="container">
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">From</th>
-        <th scope="col">To</th>
-        <th scope="col">Amount</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let transac of transactions">
-        <td>{{ transac.from }}</td>
-        <td>{{ transac.to }}</td>
-        <td>{{ transac.amount }}</td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="row">
+    <div class="col-md-4 text-center">
+      <h2>Your QRCode</h2>
+      <p>
+        QRcode for your key!
+      </p>
+      <qrcode [qrdata]="user.key" [size]="256" [level]="'M'"></qrcode>
+    </div>
+
+    <div class="col-md-4 text-center">
+      <h2>Your address key</h2>
+      <p>
+        {{user.key}}
+      </p>
+    </div>
+
+    <div class="col-md-4 text-center">
+      <h2>Balance</h2>
+      <p>
+        eth.
+      </p>
+    </div>
+  </div>
 </div>

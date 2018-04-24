@@ -4,12 +4,16 @@
       <tr>
         <th scope="col">Username</th>
         <th scope="col">Key</th>
+        <th scope="col">Add</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let contact of contacts">
-        <td>{{ contact.surname }}</td>
+        <td>{{ contact.username }}</td>
         <td>{{ contact.key }}</td>
+        <td>
+          <button class="btn btn-primary" (click)="addContact(contact)">add to contacts</button>
+        </td>
       </tr>
     </tbody>
   </table>

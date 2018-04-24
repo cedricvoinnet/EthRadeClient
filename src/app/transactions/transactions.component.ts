@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { CurrentUser } from "../CurrentUser";
 import { ContactsService } from "../services/contacts.service";
-import { EthereumService } from "../services/ethereum.service";
+// import { EthereumService } from "../services/ethereum.service";
 
 @Component({
   selector: "app-transactions",
@@ -16,15 +16,14 @@ export class TransactionsComponent implements OnInit {
     addToContact: false
   };
 
-  private newContact = {
-    surname: ""
-  };
+  contacts = [
+  ];
 
   constructor(
     private user: CurrentUser,
     private router: Router,
     private contactService: ContactsService,
-    private ethereumService: EthereumService
+    // private ethereumService: EthereumService
   ) {}
 
   ngOnInit() {
@@ -33,33 +32,27 @@ export class TransactionsComponent implements OnInit {
     if (!this.user.key) {
       this.router.navigate(["/login"]);
     }
+    this.getContacts();
   }
 
   sendEth() {
     if (this.transaction.to && this.transaction.amount) {
       console.log("send transac to BC");
 
-      if (this.transaction.addToContact) {
-        console.log("send contact to server");
-        this.contactService
-          .addContact({
-            user: this.user,
-            new_contact: {
-              surname: this.newContact.surname
-                ? this.newContact.surname
-                : this.transaction.to,
-              key: this.transaction.to
-            }
-          })
-          .subscribe(
-            res => {
-              console.log(res);
-            },
-            err => {
-              console.log(err);
-            }
-          );
-      }
     }
+  }
+
+  getContacts() {
+    this.contactService.getContact({user: {'username': this.user.username, 'password': this.user.password}}).subscribe(res => {
+      console.log(JSON.parse(res));
+      this.contacts = JSON.parse(res);
+    },
+    err => {
+      console.log(err);
+    })
+  }
+
+  changeKey(contact) {
+    this.transaction.to = contact.key;
   }
 }
