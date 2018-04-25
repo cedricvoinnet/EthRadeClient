@@ -1,1 +1,5 @@
-<ui-switch [(ngModel)]="visible" (change)="onChange($event)"></ui-switch>
+<label>I want to be visible on users list:</label>
+<ui-switch [(ngModel)]="visible" (change)="visibleChange($event)"></ui-switch>
+<br />
+<label>I want to appear on transactions history:</label>
+<ui-switch [(ngModel)]="anon" (change)="anonChange($event)"></ui-switch>

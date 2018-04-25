@@ -18,7 +18,7 @@ export class ConnectionService {
   register(data): Observable<any> {
     return this.http.post(this.url + "/register", {
       username: data["username"],
-      password: data["password"]
+      password: data["password"],
       key: data["key"]
     });
   }
@@ -41,7 +41,9 @@ export class ConnectionService {
       })
     };
     return this.http.post(this.url + "/history", {
-      
+      'from': data.from,
+      'to': data.to,
+      'amount': data.amount
     }, httpOptions);
   }
 }

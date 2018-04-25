@@ -25,6 +25,9 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    if (this.user.key == undefined) {
+      this.router.navigate(['/']);
+    }
   }
 
   open(content) {

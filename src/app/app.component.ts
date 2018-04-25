@@ -9,5 +9,5 @@ import { CurrentUser } from './CurrentUser';
 export class AppComponent {
   title = "Eth'Rade";
 
-  constructor(private key: CurrentUser){}
+  constructor(private user: CurrentUser){}
 }

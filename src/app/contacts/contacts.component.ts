@@ -13,17 +13,17 @@ export class ContactsComponent implements OnInit {
   contacts = [
   ];
 
-  constructor(private key: CurrentUser, private router: Router, private contactsService: ContactsService) { }
+  constructor(private user: CurrentUser, private router: Router, private contactsService: ContactsService) { }
 
   ngOnInit() {
-    if (!this.key.key) {
-      this.router.navigate(['/login']);
+    if (this.user.key == undefined) {
+      this.router.navigate(['/']);
     }
     this.getUsers();
   }
 
   getUsers() {
-    this.contactsService.getUsers({ user: { 'username': this.key.username, 'password': this.key.password } }).subscribe(res => {
+    this.contactsService.getUsers({ user: { 'username': this.user.username, 'password': this.user.password } }).subscribe(res => {
       console.log(JSON.parse(res));
       this.contacts = JSON.parse(res);
     },
@@ -33,7 +33,7 @@ export class ContactsComponent implements OnInit {
   }
 
   addContact(contact) {
-    this.contactsService.addContact({ user: { 'username': this.key.username, 'password': this.key.password }, new_contact: contact }).subscribe(res => {
+    this.contactsService.addContact({ user: { 'username': this.user.username, 'password': this.user.password }, new_contact: contact }).subscribe(res => {
       console.log(res);
     },
       err => {

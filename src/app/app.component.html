@@ -1,8 +1,7 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
   <h1>{{ title }}</h1>
-  <div *ngIf="key.key">
-    <nav>
+    <nav *ngIf="user.key != undefined">
       <a routerLink="/wallet">Wallet</a>
       <a routerLink="/transactions">Send ether</a>
       <a routerLink="/contacts">Users</a>
@@ -11,7 +10,6 @@
       <a routerLink="/login">Login</a>
       <a routerLink="/settings">Settings</a>
     </nav>
-  </div>
   <div class="mt-5">
 
   </div>

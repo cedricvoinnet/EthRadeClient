@@ -20,12 +20,16 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private connection: ConnectionService,
-    private key: CurrentUser,
+    private user: CurrentUser,
     private router: Router,
     private ethereum: EthereumService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.user.key == undefined) {
+      this.router.navigate(['/']);
+    }
+  }
 
   register() {
     this.model.key = this.ethereum.getAddress();
@@ -33,9 +37,9 @@ export class RegisterComponent implements OnInit {
       res => {
         console.log(res.token);
         this.model.key = res.token;
-        this.key.username = this.model.username;
-        this.key.password = this.model.password;
-        this.key.key = this.model.key;
+        this.user.username = this.model.username;
+        this.user.password = this.model.password;
+        this.user.key = this.model.key;
         this.router.navigate(["/wallet"]);
       },
       err => {

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="user.appear">
   <table class="table">
     <thead>
       <tr>
@@ -15,4 +15,7 @@
       </tr>
     </tbody>
   </table>
+</div>
+<div class="container" *ngIf="!user.appear">
+  <h1>You are anonymous, your transactions are not tracked and cannot be displayed.</h1>
 </div>

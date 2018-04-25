@@ -32,6 +32,7 @@ export class ContactsService {
   }
 
   getUsers(data): Observable<any> {
+    console.log(this.url + "/users")
     const httpOptions = {
       headers: new HttpHeaders({
         'username': data.user.username,
@@ -39,5 +40,15 @@ export class ContactsService {
       })
     };
     return this.http.get(this.url + "/users", httpOptions);
+  }
+
+  setVisible(data): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'username': data.user.username,
+        'password': data.user.password,
+      })
+    };
+    return this.http.post(this.url + "/visible", {'visible': data.visible}, httpOptions)
   }
 }

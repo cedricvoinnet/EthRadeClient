@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EthereumService } from '../services/ethereum.service';
 import { Router } from '@angular/router';
+import { CurrentUser } from '../CurrentUser';
 
 @Component({
   selector: 'app-account',
@@ -15,7 +16,7 @@ export class AccountComponent implements OnInit {
   create = false;
   import = false;
 
-  constructor(private service: EthereumService, private router : Router) { 
+  constructor(private service: EthereumService, private router : Router, private user: CurrentUser) {
 
   }
 
@@ -47,13 +48,15 @@ export class AccountComponent implements OnInit {
     console.log(this.passwordCreate);
     this.service.setPassword(this.passwordCreate);
     await this.service.createWallet();
-    this.router.navigate(['wallet']);
+    this.user.key = this.service.getAddress();
+    this.router.navigate(['/wallet']);
   }
 
   async importAccount() {
     console.log(this.passwordImport);
     this.service.setPassword(this.passwordImport);
     await this.service.getWallet(this.file);
-    this.router.navigate(['wallet']);
+    this.user.key = this.service.getAddress();
+    this.router.navigate(['/wallet']);
   }
 }

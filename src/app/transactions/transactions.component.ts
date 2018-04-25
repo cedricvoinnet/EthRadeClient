@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { CurrentUser } from "../CurrentUser";
 import { ContactsService } from "../services/contacts.service";
+import { ConnectionService } from "../services/connection.service";
 import { EthereumService } from "../services/ethereum.service";
 
 @Component({
@@ -23,14 +24,13 @@ export class TransactionsComponent implements OnInit {
     private user: CurrentUser,
     private router: Router,
     private contactService: ContactsService,
+    private connectionService: ConnectionService,
     private ethereumService: EthereumService
-  ) {}
+  ) { }
 
   ngOnInit() {
-    console.log(this.user);
-
-    if (!this.user.key) {
-      this.router.navigate(["/login"]);
+    if (this.user.key == undefined) {
+      this.router.navigate(['/']);
     }
     this.getContacts();
   }
@@ -38,19 +38,24 @@ export class TransactionsComponent implements OnInit {
   sendEth() {
     if (this.transaction.to && this.transaction.amount) {
       console.log("send transac to BC");
-      this.ethereumService.send(this.transaction.to, this.transaction.amount)
-
+      this.ethereumService.send(this.transaction.to, this.transaction.amount);
+      if (this.user.appear) {
+        this.connectionService.sendTransaction({
+          'user': { 'username': this.user.username, 'password': this.user.password },
+          'from': this.user.key, 'to': this.transaction.to, 'amount': this.transaction.amount
+        })
+      }
     }
   }
 
   getContacts() {
-    this.contactService.getContact({user: {'username': this.user.username, 'password': this.user.password}}).subscribe(res => {
+    this.contactService.getContact({ user: { 'username': this.user.username, 'password': this.user.password } }).subscribe(res => {
       console.log(JSON.parse(res));
       this.contacts = JSON.parse(res);
     },
-    err => {
-      console.log(err);
-    })
+      err => {
+        console.log(err);
+      })
   }
 
   changeKey(contact) {

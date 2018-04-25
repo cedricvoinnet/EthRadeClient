@@ -14,7 +14,13 @@ export class HistoricComponent implements OnInit {
   constructor(private user: CurrentUser, private router: Router, private connectionService: ConnectionService) { }
 
   ngOnInit() {
-    this.getHistory();
+    if (this.user.key == undefined) {
+      this.router.navigate(['/']);
+    }
+    console.log("histo", this.user.appear)
+    if (this.user.appear) {
+      this.getHistory();
+    }
   }
 
   getHistory() {

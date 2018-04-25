@@ -18,7 +18,11 @@ export class WalletComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
+    console.log(this.user.key);
+    if (this.user.key == undefined) {
+      this.router.navigate(['/']);
+    }
     this.user.key = this.ethereumService.getAddress();
-    this.balance = await this.ethereumService.getBalance();  
+    this.balance = await this.ethereumService.getBalance();
   }
 }
