@@ -25,4 +25,8 @@ export class WalletComponent implements OnInit {
     this.user.key = this.ethereumService.getAddress();
     this.balance = await this.ethereumService.getBalance();
   }
+
+  async refreshBalance() {
+    this.balance = await this.ethereumService.getBalance();
+  }
 }
